@@ -1,0 +1,30 @@
+input,
+:host::ng-deep .p-inputtext,
+:host::ng-deep .p-dropdown,
+:host::ng-deep .p-chips,
+.p-inputtext,
+.p-dropdown,
+.p-chips,
+textarea {
+  width: 100% !important;
+}
+
+:host::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
+  font-family: IRANSans_Light !important;
+  font-size: 14px;
+}
+
+ul li{
+  font-size: 12px;
+}
+
+:host::ng-deep .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item{
+  font-family: IRANSans_Light !important;
+  font-size: 16px;
+}
+ label{
+  font-family: IRANSans_Light !important;
+margin-top: -5px;
+  font-size: 13px;
+  display: block;
+}

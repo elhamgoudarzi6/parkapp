@@ -1,0 +1,160 @@
+<p-toast position="center"></p-toast>
+
+<div class="container-fluid mt-4 text-right">
+    <div class="row pnl-content">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" class="w-100">
+            <div class="row">
+                <div class="col-lg-5 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectUnit($event)"
+                            (onClear)="onSelectUnit($event)" [suggestions]="filteredUnits" placeholder='واحد فناور'
+                            (completeMethod)="filterUnit($event)" field="ceoFullName">
+                            <ng-template let-unit pTemplate="item">
+                                {{unit.unitType}} - {{unit.companyName}} - {{unit.ceoFullName}}
+                            </ng-template>
+                        </p-autoComplete>
+                    </span>
+                </div>
+                <div class="col-lg-2 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectType($event)"
+                            (onClear)="onSelectType($event)" [suggestions]="filteredTypes" placeholder='نوع مصوبه'
+                            (completeMethod)="filterType($event)" field="title">
+                        </p-autoComplete>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectSubType($event)"
+                            (onClear)="onSelectSubType($event)" [suggestions]="filteredSubTypes" placeholder=' مصوبه'
+                            (completeMethod)="filterSubType($event)" field="title">
+                        </p-autoComplete>
+                    </span>
+                </div>
+                <div class="col-lg-2 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectPlace($event)"
+                            (onClear)="onSelectPlace($event)" [suggestions]="filteredPlaces" placeholder='محل پرداخت'
+                            (completeMethod)="filterPlace($event)" field="title">
+                        </p-autoComplete>
+                    </span>
+                </div>
+            </div>
+            <label class="d-block">افزودن ضامن</label>
+            <form [formGroup]="formGuarantor" class="w-100">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12 mb-3">
+                        <input name="fullName" type="text" pInputText placeholder="نام و نام خانوادگی"
+                            formControlName="fullName" />
+                    </div>
+                    <div class="col-lg-3 col-sm-12 mb-3">
+                        <input name="nationalCode" pKeyFilter="int" type="text" maxlength="10" minlength="10" pInputText
+                            placeholder="کد ملی" formControlName="nationalCode" />
+                    </div>
+                    <div class="col-lg-3 col-sm-12 mb-3">
+                        <input name="mobile" pKeyFilter="int" type="text" maxlength="11" minlength="11" pInputText
+                            placeholder="موبایل" formControlName="mobile" />
+                    </div>
+                    <div class="col-lg-3 col-sm-12 mb-3">
+                        <button pButton type="button" (click)="addGuarantor()" label="ثبت"></button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-lg-10" *ngIf="guarantors.length>0">
+                <p-table [value]="guarantors" *ngIf="guarantors.length>0">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>نام و نام خانوادگی</th>
+                            <th>کد ملی</th>
+                            <th>شماره همراه</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-guarantor let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{guarantor.fullName}}</td>
+                            <td>{{guarantor.nationalCode}}</td>
+                            <td>{{guarantor.mobile}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input formControlName="guarantorMobile" maxlength="11" minlength="11" name="mobile" pInputText
+                        placeholder="شماره موبایل ضامن" required />
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="approvedAmount" type="text" pInputText placeholder="مبلغ مصوب"
+                        formControlName="approvedAmount" />
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="amountPayable" type="text" pInputText placeholder="مبلغ پرداختی"
+                        formControlName="amountPayable" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="meetingNumber" type="text" pInputText placeholder="شماره صورت جلسه"
+                        formControlName="meetingNumber" />
+                    <ul class="mt-1 text-right list-inline" *ngFor="let error of errorMessages.meetingNumber">
+                        <li class="font-small text-danger font-weight-bold list-inline-item"
+                            *ngIf="form.get('meetingNumber').hasError(error.type) && (form.get('meetingNumber').dirty || form.get('meetingNumber').touched)">
+                            {{ error.message }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="meetingDate" type="text" pInputText placeholder="تاریخ صورت جلسه"
+                        formControlName="meetingDate" />
+                    <ul class="mt-1 text-right list-inline" *ngFor="let error of errorMessages.meetingDate">
+                        <li class="font-small text-danger font-weight-bold list-inline-item"
+                            *ngIf="form.get('meetingDate').hasError(error.type) && (form.get('meetingDate').dirty || form.get('meetingDate').touched)">
+                            {{ error.message }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="paymentDate" type="text" pInputText placeholder="تاریخ پرداخت"
+                        formControlName="paymentDate" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="breathingTime" type="text" pInputText placeholder="مدت تنفس"
+                        formControlName="breathingTime" />
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="InstallmentNumber" type="text" pInputText placeholder="تعداد اقساط"
+                        formControlName="InstallmentNumber" />
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="InstallmentRemainNumber" type="text" pInputText placeholder="اقساط باقی مانده"
+                        formControlName="InstallmentRemainNumber" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="paymentDateFirst" type="text" pInputText placeholder="تاریخ پرداخت مرحله اول"
+                        formControlName="paymentDateFirst" />
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="paymentDateSecond" type="text" pInputText placeholder="تاریخ پرداخت مرحله دوم"
+                        formControlName="paymentDateSecond" />
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <input name="paymentDateThird" type="text" pInputText placeholder="تاریخ پرداخت مرحله سوم"
+                        formControlName="paymentDateThird" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex flex-row-reverse">
+                    <button type="submit" pButton label="ثبت" [disabled]="form.invalid"
+                        class="panel-dark-button mt-3"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,268 @@
+<p-toast position="center"></p-toast>
+
+<div class="container-fluid mt-4 text-right">
+    <div class="row pnl-content">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" class="w-100">
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectUnit($event)"
+                            (onClear)="onSelectUnit($event)" [suggestions]="filteredUnits" placeholder="نوع واحد فناور"
+                            (completeMethod)="filterUnit($event)" field="title">
+                        </p-autoComplete>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectUnitStatus($event)"
+                            (onClear)="onSelectUnitStatus($event)" [suggestions]="filteredUnitStatus"
+                            placeholder="وضعیت واحد فناور" (completeMethod)="filterUnitStatus($event)" field="title">
+                        </p-autoComplete>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectUnitLocation($event)"
+                            (onClear)="onSelectUnitLocation($event)" [suggestions]="filteredUnitLocation"
+                            placeholder="محل استقرار" (completeMethod)="filterUnitLocation($event)" field="title">
+                        </p-autoComplete>
+                    </span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="ceoID" maxlength="10" minlength="10" pKeyFilter="int" id="" pInputText
+                        placeholder="کد ملی مدیر عامل/نماینده" formControlName="ceoID" />
+                    <ul class="mt-1 text-right list-inline" *ngFor="let error of errorMessages.ceoID">
+                        <li class="font-small text-danger font-weight-bold list-inline-item"
+                            *ngIf="form.get('ceoID').hasError(error.type) && (form.get('ceoID').dirty || form.get('ceoID').touched)">
+                            {{ error.message }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="ceoFullName" type="text" pInputText placeholder=" نام و نام خانوادگی مدیر عامل/نماینده"
+                        formControlName="ceoFullName" />
+                    <ul class="mt-1 text-right list-inline" *ngFor="let error of errorMessages.ceoFullName">
+                        <li class="font-small text-danger font-weight-bold list-inline-item"
+                            *ngIf="form.get('ceoFullName').hasError(error.type) && (form.get('ceoFullName').dirty || form.get('ceoFullName').touched)">
+                            {{ error.message }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input pKeyFilter="int" formControlName="ceoMobile" maxlength="11" minlength="11" name="mobile"
+                        pInputText placeholder="  شماره موبایل مدیر عامل/نماینده" required />
+                    <ul class="mt-1 text-right list-inline" *ngFor="let error of errorMessages.ceoMobile">
+                        <li class="font-small text-danger font-weight-bold list-inline-item"
+                            *ngIf="form.get('ceoMobile').hasError(error.type) && (form.get('ceoMobile').dirty || form.get('ceoMobile').touched)">
+                            {{ error.message }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input type="text" formControlName="address" name="address" pInputText placeholder="آدرس"
+                        required />
+                </div>
+            </div>
+            <div class="row" *ngIf="type==='شرکت'">
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input pKeyFilter="int" formControlName="ceoPhone" maxlength="11" minlength="11" name="ceoPhone"
+                        pInputText placeholder="تلفن ثابت مدیر عامل/نماینده" required />
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="companyName" type="text" pInputText placeholder="اسم شرکت"
+                        formControlName="companyName" />
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="companyID" type="text" pInputText placeholder="شناسه ملی شرکت"
+                        formControlName="companyID" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="admissionDate" type="text" pInputText placeholder="تاریخ پذیرش"
+                        formControlName="admissionDate" />
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="admissionNum" type="text" pInputText placeholder="شماره دبیر خانه مصوبه پذیرش"
+                        formControlName="admissionNum" />
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="outDate" type="text" pInputText placeholder="تاریخ خروج" formControlName="outDate" />
+                </div>
+                <div class="col-lg-3 col-sm-12 mb-3">
+                    <input name="outNum" type="text" pInputText placeholder="شماره دبیرخانه مصوبه خروج"
+                        formControlName="outNum" />
+                </div>
+            </div>
+            <div class="row">
+                <label class="d-block mr-3">افزودن ایده های محوری</label>
+                <form [formGroup]="formIdea" class="w-100">
+                    <div class="col-lg-12 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <input name="title" type="text" pInputText placeholder="عنوان ایده"
+                                    formControlName="title" />
+
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <input name="dateIn"  type="text" pInputText placeholder="تاریخ پذیرش"
+                                    formControlName="dateIn" />
+
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <input name="dateOut" type="text" pInputText placeholder="تاریخ خروج"
+                                    formControlName="dateOut" />
+
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <button pButton pRipple type="button" label="ثبت" icon="pi pi-plus" class="p-button"
+                                    (click)="addIdea()"></button>
+
+                            </div>
+
+                        </div>
+                        <div class="col-lg-10 col-sm-12 mb-3">
+                            <p-table [value]="ideas" dataKey="id" *ngIf="ideas.length>0">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width:25%">عنوان ایده</th>
+                                        <th style="width:25%">تاریخ پذیرش</th>
+                                        <th style="width:25%">تاریخ خروج</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-idea>
+                                    <tr>
+                                        <td>
+                                            {{idea.title}}
+                                        </td>
+                                        <td>
+                                            {{idea.dateIn}}
+                                        </td>
+                                        <td>
+                                            {{idea.dateOut}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <label class="d-block mr-3">افزودن اعضای شرکت</label>
+                <form [formGroup]="formMember" class="w-100">
+                    <div class="col-lg-12 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-12 mb-3">
+                                <input name="fullName" type="text" pInputText placeholder="نام و نام خانوادگی"
+                                    formControlName="fullName" />
+                            </div>
+                            <div class="col-lg-2 col-sm-12 mb-3">
+                                <input name="nationalCode" pKeyFilter="int" type="text" maxlength="10" minlength="10" pInputText
+                                    placeholder="کد ملی" formControlName="nationalCode" />
+                            </div>
+                            <div class="col-lg-2 col-sm-12 mb-3">
+                                <input name="mobile" pKeyFilter="int" type="text" maxlength="11" minlength="11"
+                                    pInputText placeholder="موبایل" formControlName="mobile" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <input name="position" type="text" pInputText placeholder="جایگاه"
+                                    formControlName="position" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <button pButton pRipple type="button" label="ثبت" icon="pi pi-plus" class="p-button"
+                                    (click)="addMember()"></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 col-sm-12 mb-3">
+                            <p-table [value]="members" dataKey="id" *ngIf="members.length>0">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width:25%">نام و نام خانوادگی</th>
+                                        <th style="width:25%">کد ملی</th>
+                                        <th style="width:25%">موبایل</th>
+                                        <th style="width:25%">جایگاه</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-member>
+                                    <tr>
+                                        <td>
+                                            {{member.fullName}}
+                                        </td>
+                                        <td>
+                                            {{member.nationalCode}}
+                                        </td>
+                                        <td>
+                                            {{member.mobile}}
+                                        </td>
+                                        <td>
+                                            {{member.position}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <label class="d-block mr-3">افزودن اعضای تیم</label>
+                <form [formGroup]="formTeam" class="w-100">
+                    <div class="col-lg-12 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <input name="fullName" type="text" pInputText placeholder="نام و نام خانوادگی"
+                                    formControlName="fullName" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <input name="nationalCode" pKeyFilter="int" type="text" maxlength="10" minlength="10" pInputText
+                                    placeholder="کد ملی" formControlName="nationalCode" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <input name="position" type="text" pInputText placeholder="جایگاه"
+                                    formControlName="position" />
+                            </div>
+                            <div class="col-lg-3 col-sm-12 mb-3">
+                                <button pButton pRipple type="button" label="ثبت" icon="pi pi-plus" class="p-button"
+                                    (click)="addTeam()"></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 col-sm-12 mb-3">
+                            <p-table [value]="teams" dataKey="id" *ngIf="teams.length>0">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width:25%">نام و نام خانوادگی</th>
+                                        <th style="width:25%">کد ملی</th>
+                                        <th style="width:25%">جایگاه</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-team>
+                                    <tr>
+                                        <td>
+                                            {{team.fullName}}
+                                        </td>
+                                        <td>
+                                            {{team.nationalCode}}
+                                        </td>
+                                        <td>
+                                            {{team.position}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col d-flex flex-row-reverse">
+                    <button type="submit" pButton label="ثبت" [disabled]="form.invalid"
+                        class="panel-dark-button mt-3"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
