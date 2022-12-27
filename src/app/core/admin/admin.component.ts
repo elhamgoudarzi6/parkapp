@@ -72,12 +72,12 @@ export class AdminComponent implements OnInit {
       })
       if (result.title === 'واحد فناور') menu.push({
         label: 'واحد فناور',
-        icon: 'pi pi-briefcase',
+        icon: 'pi pi-building',
         routerLink: '/panel/unit',
       })
       if (result.title === 'تسهیلات') menu.push({
         label: 'تسهیلات',
-        icon: 'pi pi-dollar',
+        icon: 'pi pi-calendar',
         routerLink: '/panel/paidloan',
       })
       if (result.title === 'گزارش واحد فناور') menu.push({

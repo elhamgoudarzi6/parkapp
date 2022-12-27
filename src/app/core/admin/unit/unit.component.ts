@@ -79,26 +79,7 @@ export class UnitComponent implements OnInit {
   getUnits(): any {
     this.service.getAllUnit(this.localStorage.userToken).subscribe((response: { success: boolean; data: any; }) => {
       if (response.success === true) {
-        //  this.units = response.data;
-        this.units = [];
-        let mem = '';
-        let ideas = '';
-        let obj = { mem: "", ideas: "" };
-        for (let i in response.data) {
-          delete response.data[i].__v;
-          obj = response.data[i];
-          mem = '';
-          ideas = '';
-          for (let j in response.data[i].members) {
-            mem = mem + "," + response.data[i].members[j].fullName + " " + response.data[i].members[j].mobile;
-          }
-          for (let j in response.data[i].idea) {
-            ideas = ideas + "," + response.data[i].idea[j].title + " " + response.data[i].idea[j].dateIn;
-          }
-          obj.mem = mem;
-          obj.ideas = ideas;
-          this.units.push(obj);
-        }
+        this.units = response.data;
       } else {
         // this.token.checkTokenExamination(response.data, 'admin');
         this.messageService.add({

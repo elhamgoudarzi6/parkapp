@@ -25,15 +25,7 @@ export class AddUnitComponent implements OnInit {
   filteredUnitStatus: any[] = [];
   filteredUnitLocation: any[] = [];
   errorMessages = {
-    mobile: [
-      { type: 'required', message: 'شماره موبایل را وارد کنید.' },
-      { type: 'minlength', message: 'شماره موبایل باید 11 رقم باشد.' },
-      { type: 'maxlength', message: 'شماره موبایل باید 11 رقم باشد.' },
-      { type: 'pattern', message: 'لطفا شماره موبایل معتبر وارد کنید.' },
-    ],
     ceoID: [{ type: 'required', message: 'کد ملی را وارد کنید.' }],
-    idea: [{ type: 'required', message: 'ایده محوری را وارد کنید.' }],
-    members: [{ type: 'required', message: ' اعضا را وارد کنید.' }],
     ceoFullName: [{ type: 'required', message: 'نام را وارد کنید.' }],
     ceoMobile: [{ type: 'required', message: 'شماره همراه را وارد کنید.' }],
   };
@@ -45,14 +37,11 @@ export class AddUnitComponent implements OnInit {
     private messageService: MessageService,
     private localStorage: LocalStorageService,
     private service: AdminService,
-    public ref: DynamicDialogRef
-  ) {
+    public ref: DynamicDialogRef) {
     this.units = [{ title: 'هسته' }, { title: 'شرکت' }];
     this.unitStatus = [{ title: 'رشد مقدماتی' }, { title: 'رشد' }, { title: 'رشد یافته' }, { title: 'پارکی' }, { title: 'خدماتی' }, { title: 'R & D' }];
     this.unitLocation = [{ title: 'پارک' }, { title: 'مرکز رشد خرم آباد' }, { title: 'مرکز رشد بروجرد' }, { title: 'مرکز رشد الیگودرز' }, { title: 'مرکز رشد دورود' }, { title: 'مرکز رشد دلفان' }, { title: 'مرکز رشد کشاورزی' },]
   }
-
-
 
   ngOnInit(): void {
     this.createForm();
@@ -159,10 +148,10 @@ export class AddUnitComponent implements OnInit {
     });
     this.form = new FormGroup({
       unitType: new FormControl(null),
-      ceoID: new FormControl(null, Validators.compose([Validators.required])),
-      companyName: new FormControl(null),
       ceoFullName: new FormControl(null, Validators.compose([Validators.required])),
       ceoMobile: new FormControl(null, Validators.compose([Validators.required])),
+      ceoID: new FormControl(null, Validators.compose([Validators.required])),
+      companyName: new FormControl(null),
       ceoPhone: new FormControl(null),
       members: new FormControl(null),
       idea: new FormControl(null),

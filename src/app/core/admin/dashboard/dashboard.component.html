@@ -5,7 +5,8 @@
         <div class="row no-gutters justify-content-center">
           <div class="col-lg-12 col-sm-12 align-self-center">
             <ul class="list-inline panel-breadcrumb">
-              <li class="list-inline-item pointer" [routerLink]="['/']">سامانه اعتبارات</li>
+              <li class="list-inline-item pointer" [routerLink]="['/']">سامانه نگاه</li>
+              <li class="list-inline-item pointer" [routerLink]="['/']">واحد اعتبارات</li>
               <li class="list-inline-item current">صفحه اصلی</li>
             </ul>
           </div>
@@ -18,7 +19,7 @@
 <div class="row support">
   <div class="col-lg-3 col-md-6 mt-1">
     <a class="support-item" [routerLink]="['/panel/unit']">
-      <i class="pi pi-briefcase"></i>
+      <i class="pi pi-building"></i>
       <div class="text">
         <h5 class="purecounter">واحد های فناور</h5>
         <p> تعداد واحد های فناور {{unitCount}}</p>
@@ -27,8 +28,8 @@
   </div>
 
   <div class="col-lg-3 col-md-6 mt-1">
-    <a class="support-item" [routerLink]="['/panel/paidloan']" >
-      <i class="pi pi-dollar"></i>
+    <a class="support-item" [routerLink]="['/panel/paidloan']">
+      <i class="pi pi-calendar"></i>
       <div class="text">
         <h5 class="purecounter">تسهیلات</h5>
         <p>تعداد تسهیلات پرداختی {{paidLoanCount}} </p>

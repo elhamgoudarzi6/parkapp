@@ -7,7 +7,8 @@
         <div class="row no-gutters justify-content-center">
           <div class="col-lg-12 col-sm-12 align-self-center">
             <ul class="list-inline panel-breadcrumb">
-              <li class="list-inline-item pointer" [routerLink]="['/']">سامانه اعتبارات</li>
+              <li class="list-inline-item pointer" [routerLink]="['/']">سامانه نگاه</li>
+              <li class="list-inline-item pointer" [routerLink]="['/']">واحد اعتبارات</li>
               <li class="list-inline-item current">مدیریت مدیران</li>
             </ul>
           </div>
@@ -63,7 +64,8 @@
               </td>
               <td>
                 <img width="70" [src]="admin.image" class="profile" *ngIf="admin.image != ''" />
-                <i class="pi pi-user" *ngIf="admin.image == null || admin.image == ''" style="font-size: 20px;color:blue"></i>
+                <i class="pi pi-user" *ngIf="admin.image == null || admin.image == ''"
+                  style="font-size: 20px;color:blue"></i>
               </td>
               <td>
                 {{ admin.userName }}
