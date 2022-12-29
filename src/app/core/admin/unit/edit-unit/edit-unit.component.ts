@@ -24,11 +24,12 @@ export class EditUnitComponent implements OnInit {
   unitLocation: any[] = [];
   formIdea: FormGroup | any;
   formTeam: FormGroup | any;
+  myGroup: FormGroup | any;
   formMember: FormGroup | any;
   unit: any;
   form: FormGroup | any;
   type = 'شرکت';
-
+  dataCell: any;
   errorMessages = {
     ceoID: [{ type: 'required', message: 'کد ملی را وارد کنید.' }],
     ceoFullName: [{ type: 'required', message: 'نام را وارد کنید.' }],
@@ -46,6 +47,7 @@ export class EditUnitComponent implements OnInit {
     this.unitStatus = [{ title: 'رشد مقدماتی' }, { title: 'رشد' }, { title: 'رشد یافته' }, { title: 'پارکی' }, { title: 'خدماتی' }, { title: 'R & D' }];
     this.unitLocation = [{ title: 'پارک' }, { title: 'مرکز رشد خرم آباد' }, { title: 'مرکز رشد بروجرد' }, { title: 'مرکز رشد الیگودرز' }, { title: 'مرکز رشد دورود' }, { title: 'مرکز رشد دلفان' }, { title: 'مرکز رشد کشاورزی' },]
     this.unit = this.config.data.unit;
+    this.ideas = this.unit.idea;
     this.createForm();
   }
   filterUnitLocation(event: any) {
@@ -68,7 +70,12 @@ export class EditUnitComponent implements OnInit {
     this.filteredUnits = this.units.filter((item: any) => item.title.includes(event.query));
   }
 
+
+
   createForm() {
+    this.myGroup = new FormGroup({
+      cell: new FormControl(null),
+    });
     this.formIdea = new FormGroup({
       title: new FormControl(null),
       dateIn: new FormControl(null),

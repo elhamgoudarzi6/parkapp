@@ -91,22 +91,6 @@ export class UnitComponent implements OnInit {
     });
   }
 
-  exportWord() {
-    //  const document = new Document();
-
-    //let data = this.selectedUnits.length === 0 ? this.units : this.selectedUnits;
-    //let data = [{a:'ok'}];
-    // Packer.toBlob().then(buffer => {
-    //   console.log(buffer);
-    //   FileSaver.saveAs(buffer, "example.docx");
-    //   console.log("Document created successfully");
-    // });
-
-    // Packer.toBlob(data).then((blob: string | Blob) => {
-    //   FileSaver.saveAs(blob, "example.docx");
-    // });
-  }
-
   exportCSV() {
     let data = this.selectedUnits.length === 0 ? this.units : this.selectedUnits;
     const replacer = (_key: any, value: null) => value === null ? '' : value;
@@ -164,7 +148,7 @@ export class UnitComponent implements OnInit {
         unit,
       },
       header: 'مشاهده اطلاعات واحد فناور',
-      width: '80%',
+      width: '90%',
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -180,7 +164,7 @@ export class UnitComponent implements OnInit {
         unit,
       },
       header: 'ویرایش واحد فناور',
-      width: '80%',
+      width: '90%',
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {

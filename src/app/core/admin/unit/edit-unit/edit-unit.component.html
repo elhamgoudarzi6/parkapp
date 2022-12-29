@@ -100,27 +100,22 @@
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <input name="title" type="text" pInputText placeholder="عنوان ایده"
                                     formControlName="title" />
-
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <input name="dateIn" type="text" pInputText placeholder="تاریخ پذیرش"
                                     formControlName="dateIn" />
-
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <input name="dateOut" type="text" pInputText placeholder="تاریخ خروج"
                                     formControlName="dateOut" />
-
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <button pButton pRipple type="button" label="ثبت" icon="pi pi-plus" class="p-button"
                                     (click)="addIdea()"></button>
-
                             </div>
-
                         </div>
                         <div class="col-lg-10 col-sm-12 mb-3">
-                            <p-table [value]="unit.idea" dataKey="id" >
+                            <p-table [value]="ideas" dataKey="_id" [tableStyle]="{'min-width': '50rem'}">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="width:25%">عنوان ایده</th>
@@ -128,16 +123,44 @@
                                         <th style="width:25%">تاریخ خروج</th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-idea>
+                                <ng-template pTemplate="body" let-data let-editing="editing" let-ri="rowIndex">
                                     <tr>
-                                        <td>
-                                            {{idea.title}}
+                                        <td [pEditableColumn]="data.title" pEditableColumnField="title"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.title" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.title}}
+                                                </ng-template>
+                                            </p-cellEditor>
                                         </td>
-                                        <td>
-                                            {{idea.dateIn}}
+                                        <td [pEditableColumn]="data.dateIn" pEditableColumnField="dateIn"
+                                            [pEditableColumnRowIndex]="ri">
+
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.dateIn" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.dateIn}}
+                                                </ng-template>
+                                            </p-cellEditor>
                                         </td>
-                                        <td>
-                                            {{idea.dateOut}}
+                                        <td [pEditableColumn]="data.dateOut" pEditableColumnField="dateOut"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.dateOut" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.dateOut}}
+                                                </ng-template>
+                                            </p-cellEditor>
                                         </td>
                                     </tr>
                                 </ng-template>
@@ -173,7 +196,7 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-12 mb-3">
-                            <p-table [value]="unit.members" dataKey="id" >
+                            <p-table [value]="unit.members" dataKey="id">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="width:25%">نام و نام خانوادگی</th>
@@ -226,7 +249,7 @@
                             </div>
                         </div>
                         <div class="col-lg-10 col-sm-12 mb-3">
-                            <p-table [value]="unit.team" dataKey="id" >
+                            <p-table [value]="unit.team" dataKey="id">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="width:25%">نام و نام خانوادگی</th>

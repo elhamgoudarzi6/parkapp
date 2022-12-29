@@ -30,7 +30,7 @@ export class AddUnitComponent implements OnInit {
     ceoMobile: [{ type: 'required', message: 'شماره همراه را وارد کنید.' }],
   };
   ideas: any[] = [];
-  teams: any[] = [];
+  team: any[] = [];
   members: any[] = [];
   type = 'شرکت';
   constructor(
@@ -118,7 +118,7 @@ export class AddUnitComponent implements OnInit {
       });
     }
     else {
-      this.teams.push({
+      this.team.push({
         fullName: this.formTeam.value.fullName,
         position: this.formTeam.value.position,
         nationalCode: this.formTeam.value.nationalCode,
@@ -169,7 +169,7 @@ export class AddUnitComponent implements OnInit {
 
   submitForm(): void {
     this.form.patchValue({
-      team: this.teams,
+      team: this.team,
       idea: this.ideas,
       members: this.members,
     });
