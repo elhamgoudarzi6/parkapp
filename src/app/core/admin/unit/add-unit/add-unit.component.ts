@@ -21,6 +21,7 @@ export class AddUnitComponent implements OnInit {
   formIdea: FormGroup | any;
   formTeam: FormGroup | any;
   formMember: FormGroup | any;
+  myGroup: FormGroup | any;
   filteredUnits: any[] = [];
   filteredUnitStatus: any[] = [];
   filteredUnitLocation: any[] = [];
@@ -29,7 +30,7 @@ export class AddUnitComponent implements OnInit {
     ceoFullName: [{ type: 'required', message: 'نام را وارد کنید.' }],
     ceoMobile: [{ type: 'required', message: 'شماره همراه را وارد کنید.' }],
   };
-  ideas: any[] = [];
+  idea: any[] = [];
   team: any[] = [];
   members: any[] = [];
   type = 'شرکت';
@@ -66,7 +67,15 @@ export class AddUnitComponent implements OnInit {
   filterUnit(event: any) {
     this.filteredUnits = this.units.filter((item: any) => item.title.includes(event.query));
   }
-
+  delIdea(i:any) {
+    this.idea.splice(i,1);
+  }
+  delMember(i:any) {
+    this.members.splice(i,1);
+  }
+  delTeam(i:any) {
+    this.team.splice(i,1);
+  }
   addIdea() {
     if (this.formIdea.value.title == null || this.formIdea.value.dateIn == null || this.formIdea.value.dateOut == null) {
       this.messageService.add({
@@ -76,7 +85,7 @@ export class AddUnitComponent implements OnInit {
       });
     }
     else {
-      this.ideas.push({
+      this.idea.push({
         title: this.formIdea.value.title,
         dateIn: this.formIdea.value.dateIn,
         dateOut: this.formIdea.value.dateOut,
@@ -130,6 +139,9 @@ export class AddUnitComponent implements OnInit {
   }
 
   createForm() {
+    this.myGroup = new FormGroup({
+      cell: new FormControl(null),
+    });
     this.formIdea = new FormGroup({
       title: new FormControl(null),
       dateIn: new FormControl(null),
@@ -170,7 +182,7 @@ export class AddUnitComponent implements OnInit {
   submitForm(): void {
     this.form.patchValue({
       team: this.team,
-      idea: this.ideas,
+      idea: this.idea,
       members: this.members,
     });
     this.service

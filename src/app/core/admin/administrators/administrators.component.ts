@@ -51,6 +51,7 @@ export class AdministratorsComponent implements OnInit {
     const ref = this.dialogService.open(AdministratorAddComponent, {
       header: 'ثبت مدیر',
       width: '80%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -71,7 +72,8 @@ export class AdministratorsComponent implements OnInit {
         admin,
       },
       header: 'ویرایش ادمین',
-      width: '80%',
+      width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -91,7 +93,8 @@ export class AdministratorsComponent implements OnInit {
         admin,
       },
       header: 'ویرایش امنیتی ادمین',
-      width: '80%',
+      width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -112,7 +115,8 @@ export class AdministratorsComponent implements OnInit {
         admin,
       },
       header: 'مشاهده اطلاعات مدیر',
-      width: '80%',
+      width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {

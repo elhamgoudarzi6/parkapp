@@ -19,6 +19,7 @@ export class AddPaidLoanComponent implements OnInit {
   paymentPlaces: any[] = [];
   form: FormGroup | any;
   formGuarantor: FormGroup | any;
+  myGroup: FormGroup | any;
   filteredPlaces: any[] = [];
   filteredTypes: any[] = [];
   filteredSubTypes: any[] = [];
@@ -40,6 +41,9 @@ export class AddPaidLoanComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getunits();
+  }
+  delguarantor(i: any) {
+    this.guarantors.splice(i, 1);
   }
   onSelectPlace(event: any) {
     this.form.controls.paymentPlace.setValue(event.title);
@@ -101,6 +105,9 @@ export class AddPaidLoanComponent implements OnInit {
   }
 
   createForm() {
+    this.myGroup = new FormGroup({
+      cell: new FormControl(null),
+    });
     this.formGuarantor = new FormGroup({
       fullName: new FormControl(null),
       mobile: new FormControl(null),

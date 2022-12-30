@@ -63,6 +63,7 @@ export class UnitComponent implements OnInit {
     const ref = this.dialogService.open(AddUnitComponent, {
       header: 'ثبت واحد فناور',
       width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -149,6 +150,7 @@ export class UnitComponent implements OnInit {
       },
       header: 'مشاهده اطلاعات واحد فناور',
       width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -165,6 +167,7 @@ export class UnitComponent implements OnInit {
       },
       header: 'ویرایش واحد فناور',
       width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {

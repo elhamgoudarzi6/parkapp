@@ -18,18 +18,43 @@
                 <label>اسم شرکت : {{paidLoan.companyName}}</label>
                 <label>شناسه ملی شرکت : {{paidLoan.companyID}}</label>
             </div>
-            <div class="d-flex justify-content-between">
-                <label>اعضای تیم یا شرکت : {{paidLoan.members}}</label>
+            <div class="justify-content-right">
+                <label>ایده محوری :</label>
+                <ul *ngFor="let item of paidLoan.idea">
+                    <li>
+                        {{ item.title }} {{ item.dateIn }} {{ item.dateOut }}
+                    </li>
+                </ul>
             </div>
-            <div class="d-flex justify-content-between">
-                <label>ایده محوری : {{paidLoan.idea}}</label>
+            <div class="justify-content-right">
+                <label>اعضای شرکت :</label>
+                <ul *ngFor="let item of paidLoan.members">
+                    <li>
+                        {{ item.position }} {{ item.fullName }} {{ item.nationalcode }} {{ item.mobile }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="justify-content-right">
+                <label>اعضای تیم :</label>
+                <ul *ngFor="let item of paidLoan.team">
+                    <li>
+                        {{ item.fullName }} {{ item.nationalcode }} {{ item.position }}
+                    </li>
+                </ul>
+            </div>
+            <div class="justify-content-right">
+                <label> ضامنین :</label>
+                <ul *ngFor="let item of paidLoan.guarantors">
+                    <li>
+                        {{ item.fullName }} {{ item.nationalcode }} {{ item.mobile }}
+                    </li>
+                </ul>
             </div>
             <div class="d-flex justify-content-between">
                 <label>شماره وام گیرنده : {{paidLoan.ceoMobile}}</label>
-                <label>نام ضامنین : {{paidLoan.guarantorsName}}</label>
             </div>
             <div class="d-flex justify-content-between">
-                <label>شماره ضامنین : {{paidLoan.guarantorMobile}}</label>
                 <label>مبلغ مصوب : {{paidLoan.approvedAmount}}</label>
             </div>
             <div class="d-flex justify-content-between">

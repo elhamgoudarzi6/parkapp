@@ -169,3 +169,7 @@ ul.field li {
 :host::ng-deep .p-divider-solid.p-divider-horizontal:before {
   border-top-style: solid !important;
 }
+
+:host::ng-deep.p-toolbar {
+  background: #fff !important;
+}

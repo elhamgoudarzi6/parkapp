@@ -64,7 +64,6 @@ export class DashboardComponent implements OnInit {
             c2 += 1;
           }
         }
-        console.log(response.data[1].Unit[0].unitType)
         this.data2 = {
           labels: ['هسته', 'شرکت', 'همه'],
           datasets: [

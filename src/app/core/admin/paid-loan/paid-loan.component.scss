@@ -49,13 +49,14 @@
 
 :host::ng-deep .p-datatable .p-datatable-thead>tr>th {
   font-size: 13px;
+  text-align: center;
 }
 
 :host::ng-deep .p-datatable .p-datatable-tbody>tr>td {
   font-family: IRANSans_Light !important;
   font-size: 14px;
   padding: 8px 5px;
-
+  text-align: center;
 }
 
 :host::ng-deep .p-paginator .p-paginator-current {
@@ -82,7 +83,7 @@
 }
 
 :host::ng-deep .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
-  color: red;
+  color: orange;
 }
 
 :host::ng-deep .p-button .p-button-icon-left {
@@ -107,3 +108,9 @@
     width: 90%;
   }
 }
+
+.head{
+  font-size: 14px;
+  font-family: IRANSans_Bold !important;
+}
+

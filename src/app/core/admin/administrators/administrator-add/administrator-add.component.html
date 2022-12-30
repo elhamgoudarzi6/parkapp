@@ -52,10 +52,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-12 mb-3">
+        <div class="col-lg-12 mb-3 mt-3">
           <label class="panel-form-label">سطح دسترسی</label>
           <p-listbox [options]="items" [checkbox]="true" [filter]="true" [multiple]="true" [style]="{'width':'15rem'}"
-            optionLabel="title" (onChange)="onChangeAccess($event)"></p-listbox>
+            optionLabel="title" (onChange)="onChangeAccess($event)" emptyMessage="اطلاعاتی ثبت نشده"
+            emptyFilterMessage="یافت نشد"></p-listbox>
         </div>
       </div>
       <div class="row">

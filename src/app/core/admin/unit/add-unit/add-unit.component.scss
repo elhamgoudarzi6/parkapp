@@ -57,4 +57,15 @@ label {
   font-family: IRANSans_Light !important;
 }
 
+:host::ng-deep .p-button.p-button-danger.p-button-text,
+.p-buttonset.p-button-danger>.p-button.p-button-text,
+.p-splitbutton.p-button-danger>.p-button.p-button-text {
+  padding: 0px;
+  margin: 0px;
+  width: 15px;
+  height: 15px;
+}
 
+:host::ng-deep .p-button.p-button-danger .pi {
+  font-size: 10px;
+}

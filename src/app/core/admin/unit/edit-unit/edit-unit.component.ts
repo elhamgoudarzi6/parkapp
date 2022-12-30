@@ -15,8 +15,8 @@ import { AdminService } from '../../admin.service';
 export class EditUnitComponent implements OnInit {
   units: any[] = [];
   filteredUnits: any[] = [];
-  ideas: any[] = [];
-  teams: any[] = [];
+  idea: any[] = [];
+  team: any[] = [];
   members: any[] = [];
   filteredUnitLocation: any[] = [];
   filteredUnitStatus: any[] = [];
@@ -40,16 +40,19 @@ export class EditUnitComponent implements OnInit {
     private localStorage: LocalStorageService,
     private service: AdminService,
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig) {
-  }
+    public config: DynamicDialogConfig) { }
+
   ngOnInit(): void {
     this.units = [{ title: 'هسته' }, { title: 'شرکت' }];
     this.unitStatus = [{ title: 'رشد مقدماتی' }, { title: 'رشد' }, { title: 'رشد یافته' }, { title: 'پارکی' }, { title: 'خدماتی' }, { title: 'R & D' }];
     this.unitLocation = [{ title: 'پارک' }, { title: 'مرکز رشد خرم آباد' }, { title: 'مرکز رشد بروجرد' }, { title: 'مرکز رشد الیگودرز' }, { title: 'مرکز رشد دورود' }, { title: 'مرکز رشد دلفان' }, { title: 'مرکز رشد کشاورزی' },]
     this.unit = this.config.data.unit;
-    this.ideas = this.unit.idea;
+    this.idea = this.unit.idea;
+    this.team = this.unit.team;
+    this.members = this.unit.members;
     this.createForm();
   }
+
   filterUnitLocation(event: any) {
     this.filteredUnitLocation = this.unitLocation.filter((item: any) => item.title.includes(event.query));
   }
@@ -70,7 +73,15 @@ export class EditUnitComponent implements OnInit {
     this.filteredUnits = this.units.filter((item: any) => item.title.includes(event.query));
   }
 
-
+  delIdea(i: any) {
+    this.idea.splice(i, 1);
+  }
+  delMember(i: any) {
+    this.members.splice(i, 1);
+  }
+  delTeam(i: any) {
+    this.team.splice(i, 1);
+  }
 
   createForm() {
     this.myGroup = new FormGroup({
@@ -122,7 +133,7 @@ export class EditUnitComponent implements OnInit {
       });
     }
     else {
-      this.ideas.push({
+      this.idea.push({
         title: this.formIdea.value.title,
         dateIn: this.formIdea.value.dateIn,
         dateOut: this.formIdea.value.dateOut,
@@ -164,7 +175,7 @@ export class EditUnitComponent implements OnInit {
       });
     }
     else {
-      this.teams.push({
+      this.team.push({
         fullName: this.formTeam.value.fullName,
         position: this.formTeam.value.position,
         nationalCode: this.formTeam.value.nationalCode,
@@ -176,6 +187,11 @@ export class EditUnitComponent implements OnInit {
   }
 
   submitForm(): void {
+    this.form.patchValue({
+      team: this.team,
+      idea: this.idea,
+      members: this.members,
+    });
     this.service
       .updateUnit(this.localStorage.userToken, this.unit._id, this.form.value)
       .subscribe((response: { success: boolean; data: any; }) => {

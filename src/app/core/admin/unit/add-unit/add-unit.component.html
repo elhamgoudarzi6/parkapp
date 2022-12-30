@@ -100,44 +100,70 @@
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <input name="title" type="text" pInputText placeholder="عنوان ایده"
                                     formControlName="title" />
-
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <input name="dateIn" type="text" pInputText placeholder="تاریخ پذیرش"
                                     formControlName="dateIn" />
-
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <input name="dateOut" type="text" pInputText placeholder="تاریخ خروج"
                                     formControlName="dateOut" />
-
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
-                                <button pButton pRipple type="button" label="ثبت" icon="pi pi-plus" class="p-button"
+                                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button"
                                     (click)="addIdea()"></button>
-
                             </div>
-
                         </div>
-                        <div class="col-lg-10 col-sm-12 mb-3">
-                            <p-table [value]="ideas" dataKey="id" *ngIf="ideas.length>0">
+                        <div class="col-lg-10 col-sm-12 mb-3" *ngIf="idea.length>0">
+                            <p-table [value]="idea" dataKey="id">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="width:25%">عنوان ایده</th>
                                         <th style="width:25%">تاریخ پذیرش</th>
                                         <th style="width:25%">تاریخ خروج</th>
+                                        <th style="width:2%"></th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-idea>
+                                <ng-template pTemplate="body" let-data let-editing="editing" let-ri="rowIndex">
                                     <tr>
-                                        <td>
-                                            {{idea.title}}
+                                        <td [pEditableColumn]="data.title" pEditableColumnField="title"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.title" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.title}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td [pEditableColumn]="data.dateIn" pEditableColumnField="dateIn"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.dateIn" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.dateIn}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td [pEditableColumn]="data.dateOut" pEditableColumnField="dateOut"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.dateOut" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.dateOut}}
+                                                </ng-template>
+                                            </p-cellEditor>
                                         </td>
                                         <td>
-                                            {{idea.dateIn}}
-                                        </td>
-                                        <td>
-                                            {{idea.dateOut}}
+                                            <button (click)="delIdea(ri)" pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
                                         </td>
                                     </tr>
                                 </ng-template>
@@ -168,33 +194,74 @@
                                     formControlName="position" />
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
-                                <button pButton pRipple type="button" label="ثبت" icon="pi pi-plus" class="p-button"
+                                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button"
                                     (click)="addMember()"></button>
                             </div>
                         </div>
-                        <div class="col-lg-10 col-sm-12 mb-3">
-                            <p-table [value]="members" dataKey="id" *ngIf="members.length>0">
+                        <div class="col-lg-10 col-sm-12 mb-3" *ngIf="members.length>0">
+                            <p-table [value]="members" dataKey="id">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="width:25%">نام و نام خانوادگی</th>
                                         <th style="width:25%">کد ملی</th>
                                         <th style="width:25%">موبایل</th>
                                         <th style="width:25%">جایگاه</th>
+                                        <th style="width: 2%;"></th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-member>
+                                <ng-template pTemplate="body" let-data let-editing="editing" let-ri="rowIndex">
                                     <tr>
-                                        <td>
-                                            {{member.fullName}}
+                                        <td [pEditableColumn]="data.fullName" pEditableColumnField="fullName"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.fullName" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.fullName}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td [pEditableColumn]="data.nationalCode" pEditableColumnField="nationalCode"
+                                            [pEditableColumnRowIndex]="ri">
+
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.nationalCode" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.nationalCode}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td [pEditableColumn]="data.mobile" pEditableColumnField="mobile"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.mobile" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.mobile}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td [pEditableColumn]="data.position" pEditableColumnField="position"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.position" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.position}}
+                                                </ng-template>
+                                            </p-cellEditor>
                                         </td>
                                         <td>
-                                            {{member.nationalCode}}
-                                        </td>
-                                        <td>
-                                            {{member.mobile}}
-                                        </td>
-                                        <td>
-                                            {{member.position}}
+                                            <button (click)="delMember(ri)" pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
                                         </td>
                                     </tr>
                                 </ng-template>
@@ -221,29 +288,61 @@
                                     formControlName="position" />
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
-                                <button pButton pRipple type="button" label="ثبت" icon="pi pi-plus" class="p-button"
+                                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button"
                                     (click)="addTeam()"></button>
                             </div>
                         </div>
-                        <div class="col-lg-10 col-sm-12 mb-3">
-                            <p-table [value]="team" dataKey="id" *ngIf="team.length>0">
+                        <div class="col-lg-10 col-sm-12 mb-3" *ngIf="team.length>0">
+                            <p-table [value]="team" dataKey="id">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th style="width:25%">نام و نام خانوادگی</th>
                                         <th style="width:25%">کد ملی</th>
                                         <th style="width:25%">جایگاه</th>
+                                        <th style="width:2%"></th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-team>
+                                <ng-template pTemplate="body" let-data let-editing="editing" let-ri="rowIndex">
                                     <tr>
-                                        <td>
-                                            {{team.fullName}}
+                                        <td [pEditableColumn]="data.fullName" pEditableColumnField="fullName"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.fullName" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.fullName}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td [pEditableColumn]="data.nationalCode" pEditableColumnField="nationalCode"
+                                            [pEditableColumnRowIndex]="ri">
+
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.nationalCode" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.nationalCode}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td [pEditableColumn]="data.position" pEditableColumnField="position"
+                                            [pEditableColumnRowIndex]="ri">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input" [formGroup]="myGroup">
+                                                    <input pInputText type="text" formControlName="cell"
+                                                        [(ngModel)]="data.position" required>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{data.position}}
+                                                </ng-template>
+                                            </p-cellEditor>
                                         </td>
                                         <td>
-                                            {{team.nationalCode}}
-                                        </td>
-                                        <td>
-                                            {{team.position}}
+                                            <button (click)="delTeam(ri)" pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
                                         </td>
                                     </tr>
                                 </ng-template>

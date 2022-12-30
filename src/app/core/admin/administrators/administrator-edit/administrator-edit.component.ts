@@ -14,6 +14,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 export class AdministratorEditComponent implements OnInit {
   admin: any;
   form: FormGroup | any;
+  items: any[] | any;
+  selectedItems: any[] | any;
   errorMessages = {
     fullName: [
       { type: 'required', message: 'نام و نام خانوادگی را وارد کنید.' },
@@ -25,19 +27,43 @@ export class AdministratorEditComponent implements OnInit {
     private service: AdminService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig
-  ) {}
+  ) {
+    this.items = [
+      {
+        title: 'صفحه اصلی',
+      },
+      {
+        title: 'واحد فناور',
+      },
+      {
+        title: 'تسهیلات',
+      },
+      {
+        title: 'تنظیمات',
+      },
+      {
+        title: 'گزارش واحد فناور',
+      },
+      {
+        title: 'گزارش تسهیلات',
+      },
+    ];
+  }
+
+
+  onChangeAccess(event: any) {
+    this.selectedItems = event.value;
+  }
 
   ngOnInit(): void {
     this.admin = this.config.data.admin;
+    this.selectedItems = this.admin.accessLevel;
     this.createForm();
   }
 
   createForm() {
     this.form = new FormGroup({
-      fullName: new FormControl(
-        this.admin.fullName,
-        Validators.compose([Validators.required])
-      ),
+      fullName: new FormControl(this.admin.fullName, Validators.compose([Validators.required])),
       image: new FormControl(this.admin.image),
       accessLevel: new FormControl(this.admin.accessLevel),
     });
@@ -48,7 +74,7 @@ export class AdministratorEditComponent implements OnInit {
     const formData = new FormData();
     formData.append("file", file, file.name);
     this.service
-    .uploadFile(formData)
+      .uploadFile(formData)
       .subscribe((response: { success: boolean; imagePath: any; data: any; }) => {
         if (response.success === true) {
           this.form.controls.image.setValue(response.imagePath);
@@ -68,6 +94,9 @@ export class AdministratorEditComponent implements OnInit {
   }
 
   submitForm(): void {
+    this.form.patchValue({
+      accessLevel: this.selectedItems,
+    });
     this.service
       .updateAdmin(this.localStorage.userToken, this.admin._id, this.form.value)
       .subscribe((response: { success: boolean; data: any; }) => {

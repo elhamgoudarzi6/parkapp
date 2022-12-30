@@ -4,7 +4,7 @@
     <div class="row pnl-content">
         <form [formGroup]="form" (ngSubmit)="submitForm()" class="w-100">
             <div class="row">
-                <div class="col-lg-5 col-sm-12 mb-3">
+                <div class="col-lg-6 col-sm-12 mb-3">
                     <span class="p-fluid">
                         <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectUnit($event)"
                             (onClear)="onSelectUnit($event)" [suggestions]="filteredUnits" placeholder='واحد فناور'
@@ -15,7 +15,15 @@
                         </p-autoComplete>
                     </span>
                 </div>
-                <div class="col-lg-2 col-sm-12 mb-3">
+                <div class="col-lg-6 col-sm-12 mb-3">
+                    <span class="p-fluid">
+                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectPlace($event)"
+                            (onClear)="onSelectPlace($event)" [suggestions]="filteredPlaces" placeholder='محل پرداخت'
+                            (completeMethod)="filterPlace($event)" field="title">
+                        </p-autoComplete>
+                    </span>
+                </div>
+                <div class="col-lg-6 col-sm-12 mb-3">
                     <span class="p-fluid">
                         <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectType($event)"
                             (onClear)="onSelectType($event)" [suggestions]="filteredTypes" placeholder='نوع مصوبه'
@@ -23,19 +31,11 @@
                         </p-autoComplete>
                     </span>
                 </div>
-                <div class="col-lg-3 col-sm-12 mb-3">
+                <div class="col-lg-6 col-sm-12 mb-3">
                     <span class="p-fluid">
                         <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectSubType($event)"
                             (onClear)="onSelectSubType($event)" [suggestions]="filteredSubTypes" placeholder=' مصوبه'
                             (completeMethod)="filterSubType($event)" field="title">
-                        </p-autoComplete>
-                    </span>
-                </div>
-                <div class="col-lg-2 col-sm-12 mb-3">
-                    <span class="p-fluid">
-                        <p-autoComplete [lazy]="true" [dropdown]="true" (onSelect)="onSelectPlace($event)"
-                            (onClear)="onSelectPlace($event)" [suggestions]="filteredPlaces" placeholder='محل پرداخت'
-                            (completeMethod)="filterPlace($event)" field="title">
                         </p-autoComplete>
                     </span>
                 </div>
@@ -56,18 +56,18 @@
                             placeholder="موبایل" formControlName="mobile" />
                     </div>
                     <div class="col-lg-3 col-sm-12 mb-3">
-                        <button pButton type="button" (click)="addGuarantor()" label="ثبت"></button>
+                        <button pButton type="button" (click)="addGuarantor()" icon="pi pi-plus"></button>
                     </div>
                 </div>
             </form>
-
             <div class="col-lg-10" *ngIf="guarantors.length>0">
-                <p-table [value]="guarantors" *ngIf="guarantors.length>0">
+                <p-table [value]="guarantors">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>نام و نام خانوادگی</th>
-                            <th>کد ملی</th>
-                            <th>شماره همراه</th>
+                            <th style="width:25%">نام و نام خانوادگی</th>
+                            <th style="width:25%">کد ملی</th>
+                            <th style="width:25%">شماره همراه</th>
+                            <th style="width:2%"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-guarantor let-rowIndex="rowIndex">
@@ -77,15 +77,53 @@
                             <td>{{guarantor.mobile}}</td>
                         </tr>
                     </ng-template>
+                    <ng-template pTemplate="body" let-data let-editing="editing" let-ri="rowIndex">
+                        <tr>
+                            <td [pEditableColumn]="data.fullName" pEditableColumnField="fullName"
+                                [pEditableColumnRowIndex]="ri">
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input" [formGroup]="myGroup">
+                                        <input pInputText type="text" formControlName="cell" [(ngModel)]="data.fullName"
+                                            required>
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{data.fullName}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td [pEditableColumn]="data.nationalCode" pEditableColumnField="nationalCode"
+                                [pEditableColumnRowIndex]="ri">
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input" [formGroup]="myGroup">
+                                        <input pInputText type="text" formControlName="cell"
+                                            [(ngModel)]="data.nationalCode" required>
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{data.nationalCode}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td [pEditableColumn]="data.mobile" pEditableColumnField="mobile"
+                                [pEditableColumnRowIndex]="ri">
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input" [formGroup]="myGroup">
+                                        <input pInputText type="text" formControlName="cell" [(ngModel)]="data.mobile"
+                                            required>
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{data.mobile}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td>
+                                <button (click)="delguarantor(ri)" pButton type="button" icon="pi pi-times"
+                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
                 </p-table>
             </div>
-
-
             <div class="row">
-                <div class="col-lg-4 col-sm-12 mb-3">
-                    <input formControlName="guarantorMobile" maxlength="11" minlength="11" name="mobile" pInputText
-                        placeholder="شماره موبایل ضامن" required />
-                </div>
                 <div class="col-lg-4 col-sm-12 mb-3">
                     <input name="approvedAmount" type="text" pInputText placeholder="مبلغ مصوب"
                         formControlName="approvedAmount" />

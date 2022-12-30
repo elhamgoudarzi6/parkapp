@@ -66,6 +66,7 @@ export class PaidLoanComponent implements OnInit {
     const ref = this.dialogService.open(AddPaidLoanComponent, {
       header: 'ثبت پرداختی جدید',
       width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -87,6 +88,7 @@ export class PaidLoanComponent implements OnInit {
       },
       header: 'مشاهده اطلاعات نماینده',
       width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {
@@ -174,7 +176,8 @@ export class PaidLoanComponent implements OnInit {
         paidLoan,
       },
       header: 'ویرایش تسهیلات پرداختی',
-      width: '80%',
+      width: '90%',
+      style: {"font-family": "IRANSans_Light"},
     });
     ref.onClose.subscribe((res) => {
       if (res === true) {

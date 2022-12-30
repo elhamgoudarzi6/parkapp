@@ -74,7 +74,6 @@ export class AdministratorAddComponent implements OnInit {
       image: new FormControl(null),
       accessLevel: new FormControl(null),
     });
-    console.log(this.form.value)
   }
 
   onFileUpload(event: any): void {
@@ -100,11 +99,11 @@ export class AdministratorAddComponent implements OnInit {
         }
       });
   }
+
   onChangeAccess(event: any) {
     this.selectedItems = event.value;
-    console.log(this.selectedItems)
-
   }
+
   submitForm(): void {
     this.form.patchValue({
       accessLevel: this.selectedItems,

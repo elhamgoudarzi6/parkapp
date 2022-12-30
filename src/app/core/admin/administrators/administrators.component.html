@@ -26,7 +26,7 @@
           [globalFilterFields]="['userName','fullName']">
           <ng-template pTemplate="caption">
             <div class="table-header row">
-              <div class="col-sm-6 font-iran-bold">لیست مدیران</div>
+              <div class="col-sm-6 head">لیست مدیران</div>
               <div class="col-sm-6 text-left">
                 <button pButton pRipple label="جدید" icon="pi pi-plus"
                   class="panel-border-button p-mr-2 p-button-icon-right" (click)="showAddAdminDialog()"></button>
@@ -65,7 +65,7 @@
               <td>
                 <img width="70" [src]="admin.image" class="profile" *ngIf="admin.image != ''" />
                 <i class="pi pi-user" *ngIf="admin.image == null || admin.image == ''"
-                  style="font-size: 20px;color:blue"></i>
+                  style="font-size: 18px;color:#999"></i>
               </td>
               <td>
                 {{ admin.userName }}
