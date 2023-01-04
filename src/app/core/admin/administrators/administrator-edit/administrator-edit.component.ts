@@ -21,6 +21,7 @@ export class AdministratorEditComponent implements OnInit {
       { type: 'required', message: 'نام و نام خانوادگی را وارد کنید.' },
     ],
   };
+
   constructor(
     private messageService: MessageService,
     private localStorage: LocalStorageService,
@@ -39,13 +40,10 @@ export class AdministratorEditComponent implements OnInit {
         title: 'تسهیلات',
       },
       {
+        title: 'گزارش گیری',
+      },
+      {
         title: 'تنظیمات',
-      },
-      {
-        title: 'گزارش واحد فناور',
-      },
-      {
-        title: 'گزارش تسهیلات',
       },
     ];
   }

@@ -78,17 +78,12 @@ export class AdminComponent implements OnInit {
       if (result.title === 'تسهیلات') menu.push({
         label: 'تسهیلات',
         icon: 'pi pi-calendar',
-        routerLink: '/panel/paidloan',
+        routerLink: '/panel/payment',
       })
-      if (result.title === 'گزارش واحد فناور') menu.push({
-        label: 'گزارش واحد فناور',
+      if (result.title === 'گزارش گیری') menu.push({
+        label: 'گزارش گیری',
         icon: 'pi pi-file-pdf',
-        routerLink: '/panel/unit-report',
-      })
-      if (result.title === 'گزارش تسهیلات') menu.push({
-        label: 'گزارش تسهیلات',
-        icon: 'pi pi-file-pdf',
-        routerLink: '/panel/paid-loan-report',
+        routerLink: '/panel/report',
       })
       if (result.title === 'تنظیمات') menu.push({
         label: 'تنظیمات',
@@ -111,18 +106,13 @@ export class AdminComponent implements OnInit {
     //   {
     //     label: 'تسهیلات',
     //     icon: 'pi pi-dollar',
-    //     routerLink: '/panel/paidloan',
+    //     routerLink: '/panel/payment',
     //   },
 
     //   {
-    //     label: 'گزارش واحد فناور',
+    //     label: 'گزارش گیری',
     //     icon: 'pi pi-file-pdf',
-    //     routerLink: '/panel/unit-report',
-    //   },
-    //   {
-    //     label: 'گزارش تسهیلات',
-    //     icon: 'pi pi-file-pdf',
-    //     routerLink: '/panel/paid-loan-report',
+    //     routerLink: '/panel/report',
     //   },
     //   {
     //     label: 'تنظیمات',

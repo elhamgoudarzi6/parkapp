@@ -61,6 +61,8 @@
                     class="p-button-success mr-1" pTooltip="XLS" tooltipPosition="bottom"></button>
                   <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
                     class="p-button-warning mr-1" pTooltip="PDF" tooltipPosition="bottom"></button>
+                    <button pButton type="button" pTooltip="Print" tooltipPosition="bottom" class="p-button-primary mr-1" [useExistingCss]="true" printSectionId="printSectionId" ngxPrint
+                    icon="pi pi-print"></button>
                 </div>
               </th>
             </tr>

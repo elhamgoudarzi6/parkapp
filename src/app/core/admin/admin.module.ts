@@ -9,9 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { UnitComponent } from './unit/unit.component';
 import { AddUnitComponent } from './unit/add-unit/add-unit.component';
-import { PaidLoanComponent } from './paid-loan/paid-loan.component';
-import { AddPaidLoanComponent } from './paid-loan/add-paid-loan/add-paid-loan.component';
-import { ViewPaidLoanComponent } from './paid-loan/view-paid-loan/view-paid-loan.component';
+import { PaymentComponent } from './payment/payment.component';
+import { AddPaymentComponent } from './payment/add-payment/add-payment.component';
+import { ViewPaymentComponent } from './payment/view-payment/view-payment.component';
 import { ViewUnitComponent } from './unit/view-unit/view-unit.component';
 import { AdministratorsComponent } from './administrators/administrators.component';
 import { AdministratorAddComponent } from './administrators/administrator-add/administrator-add.component';
@@ -19,12 +19,12 @@ import { AdministratorEditComponent } from './administrators/administrator-edit/
 import { AdministratorDetailsComponent } from './administrators/administrator-details/administrator-details.component';
 import { AdministratorSecurityComponent } from './administrators/administrator-security/administrator-security.component';
 import { EditUnitComponent } from './unit/edit-unit/edit-unit.component';
-import { EditPaidLoanComponent } from './paid-loan/edit-paid-loan/edit-paid-loan.component';
-import { UnitReportComponent } from './unit-report/unit-report.component';
-import { PaidLoanReportComponent } from './paid-loan-report/paid-loan-report.component';
+import { EditPaymentComponent } from './payment/edit-payment/edit-payment.component';
+import { ReportComponent } from './report/report.component';
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 import { HomeComponent } from './home/home.component';
 import {NgxPrintModule} from 'ngx-print';
+import { ResultComponent } from './report/result/result.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +33,9 @@ import {NgxPrintModule} from 'ngx-print';
     LoginComponent,
     UnitComponent,
     AddUnitComponent,
-    PaidLoanComponent,
-    AddPaidLoanComponent,
-    ViewPaidLoanComponent,
+    PaymentComponent,
+    AddPaymentComponent,
+    ViewPaymentComponent,
     ViewUnitComponent,
     AdministratorsComponent,
     AdministratorAddComponent,
@@ -43,10 +43,10 @@ import {NgxPrintModule} from 'ngx-print';
     AdministratorDetailsComponent,
     AdministratorSecurityComponent,
     EditUnitComponent,
-    EditPaidLoanComponent,
-    UnitReportComponent,
-    PaidLoanReportComponent,
+    EditPaymentComponent,
+    ReportComponent,
     HomeComponent,
+    ResultComponent,
   ],
   imports: [
     CommonModule,

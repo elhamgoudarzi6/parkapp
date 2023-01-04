@@ -4,11 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UnitComponent } from './unit/unit.component';
-import { PaidLoanComponent } from './paid-loan/paid-loan.component';
+import { PaymentComponent } from './payment/payment.component';
 import { AdministratorsComponent } from './administrators/administrators.component';
-import { UnitReportComponent } from './unit-report/unit-report.component';
-import { PaidLoanReportComponent } from './paid-loan-report/paid-loan-report.component';
+import { ReportComponent } from './report/report.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from 'src/app/auth/auth-guard';
+
 const routes: Routes = [
   {
     path: 'panel',
@@ -37,36 +38,29 @@ const routes: Routes = [
         component: UnitComponent,
       },
     ],
+    canActivate: [AuthGuard]
   },
   {
     path: 'panel',
     component: AdminComponent,
     children: [
       {
-        path: 'paidloan',
-        component: PaidLoanComponent,
+        path: 'payment',
+        component: PaymentComponent,
       },
     ],
+    canActivate: [AuthGuard]
   },
   {
     path: 'panel',
     component: AdminComponent,
     children: [
       {
-        path: 'unit-report',
-        component: UnitReportComponent,
+        path: 'report',
+        component: ReportComponent,
       },
     ],
-  },
-  {
-    path: 'panel',
-    component: AdminComponent,
-    children: [
-      {
-        path: 'paid-loan-report',
-        component: PaidLoanReportComponent,
-      },
-    ],
+    canActivate: [AuthGuard]
   },
   {
     path: 'panel',
@@ -77,8 +71,8 @@ const routes: Routes = [
         component: AdministratorsComponent,
       },
     ],
+    canActivate: [AuthGuard]
   },
-
 ];
 
 @NgModule({

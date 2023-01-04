@@ -14,7 +14,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 export class AdministratorAddComponent implements OnInit {
   form: FormGroup | any;
-  items: any[] | any;
+  items: any[];
   selectedItems: any[] | any;
 
   errorMessages = {
@@ -42,19 +42,25 @@ export class AdministratorAddComponent implements OnInit {
         title: 'تسهیلات',
       },
       {
+        title: 'گزارش گیری',
+      },
+      {
         title: 'تنظیمات',
       },
-      {
-        title: 'گزارش واحد فناور',
-      },
-      {
-        title: 'گزارش تسهیلات',
-      },
     ];
+
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.selectedItems = [
+      {
+        title: 'صفحه اصلی',
+      },
+      {
+        title: 'واحد فناور',
+      }];
+
   }
 
   createForm() {
@@ -72,7 +78,7 @@ export class AdministratorAddComponent implements OnInit {
         Validators.compose([Validators.required])
       ),
       image: new FormControl(null),
-      accessLevel: new FormControl(null),
+      accessLevel: new FormControl(this.selectedItems),
     });
   }
 
@@ -101,7 +107,8 @@ export class AdministratorAddComponent implements OnInit {
   }
 
   onChangeAccess(event: any) {
-    this.selectedItems = event.value;
+    //  this.selectedItems = event.value;
+    console.log(event.value)
   }
 
   submitForm(): void {

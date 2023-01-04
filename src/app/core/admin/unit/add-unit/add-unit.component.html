@@ -77,15 +77,16 @@
                         formControlName="companyID" />
                 </div>
                 <div class="col-lg-3 col-sm-12 mb-3">
-                    <input name="admissionDate" type="text" pInputText placeholder="تاریخ پذیرش"
-                        formControlName="admissionDate" />
+                    <p-inputMask inputId="admissionDate" mask="9999/99/99" placeholder="تاریخ پذیرش"
+                        formControlName="admissionDate"></p-inputMask>
                 </div>
                 <div class="col-lg-3 col-sm-12 mb-3">
                     <input name="admissionNum" type="text" pInputText placeholder="شماره دبیر خانه مصوبه پذیرش"
                         formControlName="admissionNum" />
                 </div>
                 <div class="col-lg-3 col-sm-12 mb-3">
-                    <input name="outDate" type="text" pInputText placeholder="تاریخ خروج" formControlName="outDate" />
+                    <p-inputMask inputId="outDate" mask="9999/99/99" placeholder="تاریخ خروج"
+                    formControlName="outDate"></p-inputMask>
                 </div>
                 <div class="col-lg-3 col-sm-12 mb-3">
                     <input name="outNum" type="text" pInputText placeholder="شماره دبیرخانه مصوبه خروج"
@@ -102,12 +103,12 @@
                                     formControlName="title" />
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
-                                <input name="dateIn" type="text" pInputText placeholder="تاریخ پذیرش"
-                                    formControlName="dateIn" />
+                                <p-inputMask inputId="dateIn" mask="9999/99/99" placeholder="تاریخ پذیرش"
+                                    formControlName="dateIn"></p-inputMask>
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
-                                <input name="dateOut" type="text" pInputText placeholder="تاریخ خروج"
-                                    formControlName="dateOut" />
+                                <p-inputMask inputId="dateOut" mask="9999/99/99" placeholder="تاریخ خروج"
+                                    formControlName="dateOut"></p-inputMask>
                             </div>
                             <div class="col-lg-3 col-sm-12 mb-3">
                                 <button pButton pRipple type="button" icon="pi pi-plus" class="p-button"
@@ -154,6 +155,7 @@
                                             [pEditableColumnRowIndex]="ri">
                                             <p-cellEditor>
                                                 <ng-template pTemplate="input" [formGroup]="myGroup">
+
                                                     <input pInputText type="text" formControlName="cell"
                                                         [(ngModel)]="data.dateOut" required>
                                                 </ng-template>
@@ -163,7 +165,8 @@
                                             </p-cellEditor>
                                         </td>
                                         <td>
-                                            <button (click)="delIdea(ri)" pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+                                            <button (click)="delIdea(ri)" pButton type="button" icon="pi pi-times"
+                                                class="p-button-rounded p-button-text p-button-danger"></button>
                                         </td>
                                     </tr>
                                 </ng-template>
@@ -172,7 +175,7 @@
                     </div>
                 </form>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="type==='شرکت'">
                 <label class="d-block mr-3">افزودن اعضای شرکت</label>
                 <form [formGroup]="formMember" class="w-100">
                     <div class="col-lg-12 col-sm-12 mb-3">
@@ -261,7 +264,8 @@
                                             </p-cellEditor>
                                         </td>
                                         <td>
-                                            <button (click)="delMember(ri)" pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+                                            <button (click)="delMember(ri)" pButton type="button" icon="pi pi-times"
+                                                class="p-button-rounded p-button-text p-button-danger"></button>
                                         </td>
                                     </tr>
                                 </ng-template>
@@ -342,7 +346,8 @@
                                             </p-cellEditor>
                                         </td>
                                         <td>
-                                            <button (click)="delTeam(ri)" pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+                                            <button (click)="delTeam(ri)" pButton type="button" icon="pi pi-times"
+                                                class="p-button-rounded p-button-text p-button-danger"></button>
                                         </td>
                                     </tr>
                                 </ng-template>

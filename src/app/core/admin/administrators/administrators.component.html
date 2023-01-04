@@ -42,7 +42,6 @@
           </ng-template>
           <ng-template pTemplate="header">
             <tr>
-              <th style="width: 45px">ردیف</th>
               <th>
                 تصویر
               </th>
@@ -59,9 +58,6 @@
           </ng-template>
           <ng-template pTemplate="body" let-rowIndex="rowIndex" let-admin let-expanded="expanded">
             <tr>
-              <td>
-                {{ rowIndex + 1 }}
-              </td>
               <td>
                 <img width="70" [src]="admin.image" class="profile" *ngIf="admin.image != ''" />
                 <i class="pi pi-user" *ngIf="admin.image == null || admin.image == ''"

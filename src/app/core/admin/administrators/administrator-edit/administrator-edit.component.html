@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-6 col-sm-12">
           <label class="panel-form-label">تصویر پروفایل</label>
           <p-fileUpload chooseLabel="انتخاب تصویر" uploadLabel="آپلود تصویر" cancelLabel="انصراف" [customUpload]="true"
             (uploadHandler)="onFileUpload($event)" invalidFileSizeMessageDetail="حداکثر سایز فایل 2 مگابایت می باشد"
@@ -25,13 +25,16 @@
             [maxFileSize]="2000000">
           </p-fileUpload>
         </div>
+        <div class="col-lg-6 col-sm-12">
+          <img [src]="admin.image" class="img-fluid" />
+        </div>
       </div>
       <div class="row">
         <div class="col-lg-12 mb-3 mt-3">
           <label class="panel-form-label">سطح دسترسی</label>
-          <p-listbox [options]="items"  formControlName="accessLevel" [checkbox]="true" [filter]="true" [multiple]="true" [style]="{'width':'15rem'}"
-            optionLabel="title" (onChange)="onChangeAccess($event)" emptyMessage="اطلاعاتی ثبت نشده"
-            emptyFilterMessage="یافت نشد"></p-listbox>
+          <p-listbox [options]="items" formControlName="accessLevel" [checkbox]="true" [filter]="true" [multiple]="true"
+            [style]="{'width':'15rem'}" optionLabel="title" (onChange)="onChangeAccess($event)"
+            emptyMessage="اطلاعاتی ثبت نشده" emptyFilterMessage="یافت نشد"></p-listbox>
         </div>
       </div>
       <div class="row">

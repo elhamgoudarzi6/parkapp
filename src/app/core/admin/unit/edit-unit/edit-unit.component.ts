@@ -66,9 +66,9 @@ export class EditUnitComponent implements OnInit {
     this.form.controls.unitStatus.setValue(event.title);
   }
   onSelectUnit(event: any) {
+    this.type = event.title;
     this.form.controls.unitType.setValue(event.title);
   }
-
   filterUnit(event: any) {
     this.filteredUnits = this.units.filter((item: any) => item.title.includes(event.query));
   }
